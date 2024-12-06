@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Produit{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Produit</h1>
+        <h2>{{ produit.nom }}</h2>
+        <p>Description: {{ produit.description }}</p>
+        <p>Prix: {{ produit.prix }} €</p>
+        <p>Stock: {{ produit.stock }}</p>
+        <img src="{{ asset('images/' ~ produit.photo) }}" alt="photo {{ produit.nom }}" style="width: 100px; height: 100px;">
+    </div>
+{% endblock %}
