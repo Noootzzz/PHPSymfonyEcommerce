@@ -1,31 +1,43 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Accueil
+{% endblock %}
 
 {% block body %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}!</h1>
-    {{ dump(app.user) }}
-    <a href="{{ path('app_logout') }}">Logout</a>
-    <h1>Liste des Produits</h1>
+	<div class="example-wrapper">
+		{{ dump(app.user) }}
+		<a href="{{ path('app_logout') }}">Logout</a>
 
-    {% if produits is not empty %}
-        <ul>
-            {% for produit in produits %}
-                <li>
-                    <a href="{{ path('app_produit', {id: produit.id}) }}">
-                        <strong>{{ produit.nom }}</strong><br>
-                        Description: {{ produit.description }}<br>
-                        Prix: {{ produit.prix }} €<br>
-                        Stock: {{ produit.stock }}<br>
-                        <img src="{{ asset('images/' ~ produit.photo) }}" alt="photo {{ produit.nom }}" style="width: 100px; height: 100px;">
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucun produit disponible.</p>
-    {% endif %}
-</div>
+		{% if is_granted('ROLE_ADMIN') %}
+		{{ form(ajout_produit) }}
+		{% endif %}
+
+		<h1>Liste des Produits</h1>
+
+		{% if produits is not empty %}
+			<ul>
+				{% for produit in produits %}
+					<li>
+						<a href="{{ path('app_produit', {id: produit.id}) }}">
+							<strong>{{ produit.nom }}</strong><br>
+							Description:
+							{{ produit.description }}<br>
+							Prix:
+							{{ produit.prix }}
+							€<br>
+							Stock:
+							{{ produit.stock }}<br>
+							<img src="{{ asset('images/' ~ produit.photo) }}" alt="photo {{ produit.nom }}" style="width: 100px; height: 100px;">
+						</a>
+						{% if is_granted('ROLE_SUPER_ADMIN') %}
+							<h2>ROLE_SUPER_ADMIN</h2>
+						{% endif %}
+					</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<p>Aucun produit disponible.</p>
+		{% endif %}
+	</div>
 {% endblock %}
