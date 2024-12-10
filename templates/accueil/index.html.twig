@@ -9,7 +9,7 @@
 		{{ dump(app.user) }}
 		<a href="{{ path('app_logout') }}">Logout</a>
 
-		{% if is_granted('ROLE_ADMIN') %}
+		{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
 		{{ form(ajout_produit) }}
 		{% endif %}
 
@@ -30,9 +30,6 @@
 							{{ produit.stock }}<br>
 							<img src="{{ asset('images/' ~ produit.photo) }}" alt="photo {{ produit.nom }}" style="width: 100px; height: 100px;">
 						</a>
-						{% if is_granted('ROLE_SUPER_ADMIN') %}
-							<h2>ROLE_SUPER_ADMIN</h2>
-						{% endif %}
 					</li>
 				{% endfor %}
 			</ul>

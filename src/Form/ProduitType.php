@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Produit;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,8 +18,14 @@ class ProduitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Nom')
-            ->add('Description')
+            ->add('Nom', TextType::class, [
+                'required' => true,
+                'label' => 'Nom',
+            ])
+            ->add('Description', TextType::class, [
+                'required' => true,
+                'label' => 'Description',
+            ])
             ->add('Prix', NumberType::class, [
                 'scale' => 2, // Nombre de décimales
                 'constraints' => [
@@ -44,7 +51,7 @@ class ProduitType extends AbstractType
                     ])
                 ],
             ])
-            ->add('save', SubmitType::class, ['label' => 'Submit'])
+            ->add('save', SubmitType::class, ['label' => 'Ajouter'])
         ;
     }
 

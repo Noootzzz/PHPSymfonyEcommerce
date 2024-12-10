@@ -1,14 +1,31 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Produit{% endblock %}
+{% block title %}Produit
+{% endblock %}
 
 {% block body %}
-    <div class="example-wrapper">
-        <h1>Produit</h1>
-        <h2>{{ produit.nom }}</h2>
-        <p>Description: {{ produit.description }}</p>
-        <p>Prix: {{ produit.prix }} €</p>
-        <p>Stock: {{ produit.stock }}</p>
-        <img src="{{ asset('images/' ~ produit.photo) }}" alt="photo {{ produit.nom }}" style="width: 100px; height: 100px;">
-    </div>
+<a href="{{ path('app_accueil') }}">Retour à l'accueil</a>
+	<div class="example-wrapper">
+		<h1>Produit</h1>
+		<h2>{{ produit.nom }}</h2>
+		<p>Description:
+			{{ produit.description }}</p>
+		<p>Prix:
+			{{ produit.prix }}
+			€</p>
+		<p>Stock:
+			{{ produit.stock }}</p>
+		<img src="{{ asset('images/' ~ produit.photo) }}" alt="photo {{ produit.nom }}" style="width: 100px; height: 100px;">
+
+
+		{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+			<form action="{{path('app_delete_produit', {id: produit.id})}}" method="POST">
+				<input type="hidden" name="csrf" value="{{ csrf_token('delete' ~ produit.id) }}">
+				<input type="submit" value="Supprimer">
+			</form>
+		{% endif %}
+		{% if is_granted('ROLE_ADMIN') or is_granted('ROLE_SUPER_ADMIN') %}
+			<a href="{{ path('app_edit_produit', { id: produit.id }) }}">Modifier le produit</a>
+		{% endif %}
+	</div>
 {% endblock %}

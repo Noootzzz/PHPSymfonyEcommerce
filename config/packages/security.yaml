@@ -38,8 +38,10 @@ security:
         - { path: ^/login, roles: [] }
         - { path: ^/register, roles: [] }
         - { path: ^/super-admin, roles: ROLE_SUPER_ADMIN }
-        - { path: ^/admin, roles: ROLE_ADMIN }
-        - { path: ^/, roles: ROLE_USER } # Toutes les autres routes nécessitent ROLE_USER
+        - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: ^/produit/edit, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: ^/produit/delete, roles: [ROLE_ADMIN, ROLE_SUPER_ADMIN] }
+        - { path: ^/, roles: ROLE_USER }
 
 when@test:
     security:

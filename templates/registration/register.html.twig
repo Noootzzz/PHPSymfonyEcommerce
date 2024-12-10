@@ -3,6 +3,8 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
+
+    <a href="{{ path('app_login') }}">Se connecter</a>
     <h1>Register</h1>
 
     {{ form_errors(registrationForm) }}

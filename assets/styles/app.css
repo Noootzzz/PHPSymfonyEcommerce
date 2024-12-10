@@ -1,3 +1,21 @@
 body {
-    background-color: skyblue;
+    background-color: #121212;
+    color: #fff;
+}
+
+ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+li {
+    background-color: #1E1E1E;
+    padding: 1rem;
+}
+
+a {
+    color: #fff;
+    text-decoration: none;
 }
