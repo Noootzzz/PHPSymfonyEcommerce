@@ -5,6 +5,8 @@
 
 {% block body %}
 
+	<a href="{{ path('app_panier') }}">Panier</a>
+
 	<div class="example-wrapper">
 		{{ dump(app.user) }}
 		<a href="{{ path('app_logout') }}">Logout</a>
