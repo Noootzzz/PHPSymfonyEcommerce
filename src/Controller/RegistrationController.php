@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Panier;
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,6 +30,15 @@ class RegistrationController extends AbstractController
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
 
             $entityManager->persist($user);
+            $entityManager->flush();
+
+            // Crée un panier vide pour cet utilisateur
+            $panier = new Panier();
+            $panier->setUtilisateur($user);
+
+            // Persiste l'utilisateur et le panier
+            $entityManager->persist($user);
+            $entityManager->persist($panier);
             $entityManager->flush();
 
             return $security->login($user, 'form_login', 'main');

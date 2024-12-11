@@ -22,7 +22,7 @@ class Panier
     private ?\DateTimeInterface $DateAchat = null;
 
     #[ORM\Column]
-    private ?bool $Etat = null;
+    private ?bool $Etat = false;
 
     #[ORM\OneToOne(mappedBy: 'Panier', cascade: ['persist', 'remove'])]
     private ?ContenuPanier $contenuPanier = null;
